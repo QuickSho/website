@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Kixx - Design Your Art</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS Variables and Reset --- */
+    :root {
+      --accent-cyan: #00fff5;
+      --accent-purple: #b084ff;
+      --text-light: #ffffff;
+      --dark: #0b0b0b;
+      --glass: rgba(0, 0, 0, 0.6);
+      --font: 'Outfit', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* --- Global Body and Background --- */
+    body {
+      font-family: var(--font);
+      color: var(--text-light);
+      background: var(--dark) url('img/Kaws 4k Wallpaper S For.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    /* --- Header and Navigation --- */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      text-align: center;
+      padding: 20px 0;
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 999;
+    }
+
+    header h1 {
+      font-weight: 800;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 15px;
+      opacity: 0.75;
+      transition: opacity 0.3s;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 10%;
+    }
+
+    .hero h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      opacity: 0.85;
+      max-width: 700px;
+    }
+
+    /* --- Gallery Section --- */
+    section#gallery {
+      padding: 100px 10% 80px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    section#gallery h2 {
+      font-size: 2rem;
+      color: var(--accent-cyan);
+      margin-bottom: 60px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .shoe-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      justify-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .shoe-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 255, 245, 0.2);
+      transform: perspective(1000px) translateZ(0);
+    }
+
+    .shoe-card:hover {
+      transform: perspective(1000px) translateZ(20px) scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 255, 245, 0.5);
+    }
+
+    .shoe-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .shoe-images img {
+      width: calc(33.33% - 2px);
+      height: 120px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .shoe-card-content {
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .shoe-card h3 {
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .shoe-card p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .btn-design {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      color: var(--dark);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: transform 0.3s;
+    }
+
+    .btn-design:hover {
+      transform: scale(1.08);
+    }
+
+    /* --- Combined Design & Contact Section --- */
+    section#design {
+      text-align: center;
+      padding: 100px 10%;
+      background: rgba(0, 0, 0, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    section#design h2 {
+      font-size: 2.5rem;
+      color: var(--accent-purple);
+      margin-bottom: 20px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    section#design .subheading {
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    section#design p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 700px;
+      margin: 0 auto 50px;
+      line-height: 1.6;
+    }
+
+    .design-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .design-info {
+      text-align: left;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .design-info h3 {
+      color: var(--accent-cyan);
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .design-features {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .design-features li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .design-features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+
+    .design-features li:last-child {
+      border-bottom: none;
+    }
+    
+    .contact-form-group {
+      text-align: left;
+    }
+
+    .contact-form-group label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: var(--accent-purple);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .contact-form-group input,
+    .contact-form-group textarea,
+    .contact-form-group select {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      font-family: var(--font);
+      font-size: 1rem;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .contact-form-group input:focus,
+    .contact-form-group textarea:focus,
+    .contact-form-group select:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-submit {
+      width: 100%;
+      display: block;
+      margin-top: 30px;
+      padding: 18px 50px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      color: var(--dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      font-size: 1rem;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(176, 132, 255, 0.5);
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      background: rgba(0, 0, 0, 0.85);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* --- MODAL STYLING --- */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.4s ease;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 900px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 25px rgba(0, 255, 245, 0.4);
+      animation: fadeInUp 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .modal-content h3 {
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+
+    .modal-content p {
+      font-size: 1rem;
+      opacity: 0.85;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .modal-layout {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .modal-images {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 40%;
+    }
+
+    .modal-images img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      height: 120px;
+      box-shadow: 0 0 10px rgba(0, 255, 245, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .modal-images img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 245, 0.6);
+    }
+
+    .modal-preview {
+      width: 60%;
+      position: relative;
+    }
+
+    .enlarged-image {
+      width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+      height: 300px;
+      box-shadow: 0 0 25px rgba(0, 255, 245, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .image-caption {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      text-align: center;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: var(--accent-cyan);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* --- Responsive Media Queries --- */
+    @media (max-width: 1100px) {
+      .shoe-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 700px;
+      }
+      
+      .design-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .modal-layout {
+        flex-direction: column;
+      }
+      
+      .modal-images {
+        flex-direction: row;
+        width: 100%;
+      }
+      
+      .modal-images img {
+        height: 80px;
+      }
+      
+      .modal-preview {
+        width: 100%;
+      }
+      
+      .enlarged-image {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .shoe-gallery {
+        grid-template-columns: 1fr;
+      }
+      nav a {
+        margin: 0 8px;
+      }
+      .shoe-images img {
+        height: 100px;
+      }
+      
+      .modal-images {
+        flex-direction: column;
+      }
+      
+      .modal-images img {
+        height: 100px;
+      }
+      
+      section#design {
+        padding: 80px 5%;
+      }
+      
+      .design-info {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>CUSTOM KIXX</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#gallery">Latest Work</a>
+      <a href="#design">Create Yours</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h2>Design Your Art</h2>
+    <p>Limitless Kixx. Built by you. Express your inner self.</p>
+  </section>
+
+  <section id="gallery">
+    <h2>— Latest Work Done —</h2>
+    <div class="shoe-gallery">
+      
+      <!-- The Walker -->
+      <div class="shoe-card">
+        <div class="shoe-images">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8855.jpg" alt="The Walker - Front View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8856.jpg" alt="The Walker - Side View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8858.jpg" alt="The Walker - Back View">
+        </div>
+        <div class="shoe-card-content">
+          <h3>The Walker</h3>
+          <p>Zombie apocalypse inspired custom design with distressed details.</p>
+          <a href="#" class="btn-design" data-shoe="The Walker" data-desc="A custom design inspired by The Walking Dead. The shoes feature a distressed, speckled, and splattered look (like blood/dirt), earthy green and beige tones, with a zombie-like graphic and the text 'THE WALKING DEAD' on the midsole/toe box.">View Design</a>
+        </div>
+      </div>
+
+      <!-- Jamrock Legend -->
+      <div class="shoe-card">
+        <div class="shoe-images">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8859.jpg" alt="Jamrock Legend - Front View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8860.jpg" alt="Jamrock Legend - Side View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8861.jpg" alt="Jamrock Legend - Back View">
+        </div>
+        <div class="shoe-card-content">
+          <h3>Jamrock Legend</h3>
+          <p>Reggae-inspired tribute featuring Bob Marley portrait.</p>
+          <a href="#" class="btn-design" data-shoe="Jamrock Legend" data-desc="A vibrant, custom colorway inspired by the Rastafari/Reggae colors (red, gold/yellow, green). One side features a detailed portrait of Bob Marley and a signature, while the heel tab has a stylized marijuana leaf emblem.">View Design</a>
+        </div>
+      </div>
+
+      <!-- Supreme Flex -->
+      <div class="shoe-card">
+        <div class="shoe-images">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8864.jpg" alt="Supreme Flex - Front View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8865.jpg" alt="Supreme Flex - Side View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8866.jpg" alt="Supreme Flex - Back View">
+        </div>
+        <div class="shoe-card-content">
+          <h3>Supreme Flex</h3>
+          <p>Streetwear luxury with Supreme branding and LV-inspired patterns.</p>
+          <a href="#" class="btn-design" data-shoe="Supreme Flex" data-desc="White and red custom design featuring prominent Supreme branding, including the box logo, and a repeated pattern that mimics the Louis Vuitton monogram, along with text like 'FAMOUS WORLD 1994.' The laces are also branded Supreme.">View Design</a>
+        </div>
+      </div>
+      
+      <!-- Tactical Heat -->
+      <div class="shoe-card">
+        <div class="shoe-images">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8867.jpg" alt="Tactical Heat - Front View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8868.jpg" alt="Tactical Heat - Side View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8869.jpg" alt="Tactical Heat - Back View">
+        </div>
+        <div class="shoe-card-content">
+          <h3>Tactical Heat</h3>
+          <p>Military-inspired camo with bold orange accents.</p>
+          <a href="#" class="btn-design" data-shoe="Tactical Heat" data-desc="A clean, black sneaker featuring a classic camouflage pattern (green, brown, tan) on the side panels and toe, contrasted sharply by a bold orange Nike Swoosh and small gold accents on the laces.">View Design</a>
+        </div>
+      </div>
+      
+      <!-- The Bulls -->
+      <div class="shoe-card">
+        <div class="shoe-images">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8870.jpg" alt="The Bulls - Front View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8871.jpg" alt="The Bulls - Side View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8873.jpg" alt="The Bulls - Back View">
+        </div>
+        <div class="shoe-card-content">
+          <h3>The Bulls</h3>
+          <p>Chicago Bulls tribute honoring Michael Jordan's legacy.</p>
+          <a href="#" class="btn-design" data-shoe="The Bulls" data-desc="A red, black, and white custom paint job on the Jordan 1 Low that pays homage to Michael Jordan's championships with the Chicago Bulls. The design includes the iconic Chicago Bulls logo and text indicating the championship three-peats ('91-93' and '96-98'). Features Jordan's portrait, skyline graphics, and the phrase 'PASSION WITH A PURPOSE' on the midsole.">View Design</a>
+        </div>
+      </div>
+      
+      <!-- The Raiders -->
+      <div class="shoe-card">
+        <div class="shoe-images">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8890.jpg" alt="The Raiders - Front View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8891.jpg" alt="The Raiders - Side View">
+          <img src="C:\Users\elial\Downloads\New folder\img\IMG_8892.jpg" alt="The Raiders - Back View">
+        </div>
+        <div class="shoe-card-content">
+          <h3>The Raiders</h3>
+          <p>Bold football-inspired design with team branding.</p>
+          <a href="#" class="btn-design" data-shoe="The Raiders" data-desc="A bold, black and grey custom design featuring the Las Vegas Raiders team logo on the side panel. Text includes the city names 'OAKLAND' and 'RAIDERS' in team colors. The shoes also feature a custom '44' graphic, a sleek two-tone grey and black leather upper, and an aggressively chunky, black rope lace replacing the standard laces for an extra customized look.">View Design</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Combined Design & Contact Section -->
+  <section id="design">
+    <h2>— Design Your Own —</h2>
+    <div class="subheading">— Connect With Us To Create Your Masterpiece —</div>
+    <p>Ready to bring your vision to life? Fill out the inquiry form below to start designing your custom kicks. Share your ideas, themes, and inspiration, and we'll work with you to create something truly unique.</p>
+    
+    <div class="design-container">
+      <div class="design-info">
+        <h3>How It Works</h3>
+        <ul class="design-features">
+          <li><strong>Consultation:</strong> Share your vision and ideas with us</li>
+          <li><strong>Design Concept:</strong> We create a custom design based on your preferences</li>
+          <li><strong>Approval:</strong> Review and refine the design until it's perfect</li>
+          <li><strong>Creation:</strong> Hand-crafted execution with premium materials</li>
+          <li><strong>Delivery:</strong> Your unique custom kicks delivered to you</li>
+        </ul>
+        <p><strong>Turnaround Time:</strong> 2-4 weeks depending on complexity</p>
+        <p><strong>Starting Price:</strong> $200+ (varies by design complexity)</p>
+      </div>
+      
+      <div class="contact-form-group">
+        <form action="submit_form.php" method="POST">
+          <div>
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <div>
+            <label for="shoe-type">Shoe Type Preference</label>
+            <select id="shoe-type" name="shoe-type">
+              <option value="">Select preferred shoe type</option>
+              <option value="jordan-1">Jordan 1</option>
+              <option value="dunk">Nike Dunk</option>
+              <option value="air-force">Air Force 1</option>
+              <option value="vans">Vans</option>
+              <option value="other">Other (specify in message)</option>
+            </select>
+          </div>
+          <div>
+            <label for="design-inspiration">Design Inspiration / Concept</label>
+            <textarea id="design-inspiration" name="design-inspiration" rows="4" placeholder="Describe your design ideas, themes, colors, characters, or any specific elements you want included..." required></textarea>
+          </div>
+          <div>
+            <label for="budget">Budget Range</label>
+            <select id="budget" name="budget">
+              <option value="">Select your budget range</option>
+              <option value="200-300">$200 - $300</option>
+              <option value="300-400">$300 - $400</option>
+              <option value="400-500">$400 - $500</option>
+              <option value="500+">$500+</option>
+            </select>
+          </div>
+          <div>
+            <label for="timeline">Desired Timeline</label>
+            <select id="timeline" name="timeline">
+              <option value="">Select your timeline</option>
+              <option value="2-3 weeks">2-3 weeks</option>
+              <option value="3-4 weeks">3-4 weeks</option>
+              <option value="1-2 months">1-2 months</option>
+              <option value="flexible">Flexible</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-submit">Start Your Custom Design</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>CUSTOM KIXX © 2025 — Create Your Masterpiece.</p>
+  </footer>
+
+  <div class="modal" id="shoeModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <div class="modal-layout">
+        <div class="modal-images" id="modalImages"></div>
+        <div class="modal-preview">
+          <img id="enlargedImage" class="enlarged-image" src="" alt="Enlarged view">
+          <div id="imageCaption" class="image-caption">Hover over images to enlarge</div>
+        </div>
+      </div>
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+
+  <script>
+    // --- Modal Functionality ---
+    const modal = document.getElementById('shoeModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDescription');
+    const modalImages = document.getElementById('modalImages');
+    const enlargedImage = document.getElementById('enlargedImage');
+    const imageCaption = document.getElementById('imageCaption');
+    const closeBtn = document.querySelector('.close-modal');
+
+    // Open modal and set content based on data attributes
+    document.querySelectorAll('.btn-design').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        modalTitle.textContent = btn.dataset.shoe;
+        modalDesc.textContent = btn.dataset.desc;
+        
+        // Get the images from the clicked shoe card
+        const shoeCard = btn.closest('.shoe-card');
+        const images = shoeCard.querySelectorAll('.shoe-images img');
+        
+        // Clear previous images
+        modalImages.innerHTML = '';
+        
+        // Add images to modal
+        images.forEach((img, index) => {
+          const modalImg = document.createElement('img');
+          modalImg.src = img.src;
+          modalImg.alt = img.alt;
+          modalImg.dataset.caption = img.alt;
+          
+          // Set first image as default enlarged view
+          if (index === 0) {
+            enlargedImage.src = img.src;
+            enlargedImage.alt = img.alt;
+            imageCaption.textContent = img.alt;
+          }
+          
+          // Add hover event to show enlarged image
+          modalImg.addEventListener('mouseenter', function() {
+            enlargedImage.src = this.src;
+            enlargedImage.alt = this.alt;
+            imageCaption.textContent = this.dataset.caption;
+          });
+          
+          modalImages.appendChild(modalImg);
+        });
+        
+        modal.style.display = 'flex';
+      });
+    });
+
+    // Close modal functions
+    closeBtn.onclick = () => (modal.style.display = 'none');
+    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
+  </script>
+</body>
+</html>
